@@ -1,0 +1,20 @@
+{% extends "base.html" %}
+{% block title %}My Profile - Metamorphosis{% endblock %}
+{% block content %}
+    <h1>My Profile</h1>
+    <div class="card">
+        {% if profile_user.avatar %}
+            <img src="{{ profile_user.avatar.url }}" alt="Avatar for {{ profile_user.username }}" width="110" height="110" style="object-fit: cover; border-radius: 50%;">
+        {% else %}
+            <p><em>No profile photo uploaded yet.</em></p>
+        {% endif %}
+        <p><strong>Username:</strong> {{ profile_user.username }}</p>
+        <p><strong>Role:</strong> {{ profile_user.get_role_display }}</p>
+    </div>
+
+    <form method="post" enctype="multipart/form-data">
+        {% csrf_token %}
+        {{ form.as_p }}
+        <button type="submit">Save Profile</button>
+    </form>
+{% endblock %}

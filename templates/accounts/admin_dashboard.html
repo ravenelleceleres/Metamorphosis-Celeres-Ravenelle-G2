@@ -1,0 +1,15 @@
+{% extends "base.html" %}
+{% block title %}Admin Dashboard - Metamorphosis{% endblock %}
+{% block content %}
+  <h1>Admin Dashboard</h1>
+  <p>Signed in as <strong>{{ user.username }}</strong> ({{ user.get_role_display }})</p>
+  <div class="card">
+    <h3>System Overview</h3>
+    <p>Total Registered Users: <strong>{{ total_users }}</strong></p>
+    <p>Active Customers: <strong>{{ customer_count }}</strong></p>
+  </div>
+  <div class="card">
+    <h3>Admin Controls</h3>
+    <p>Review FX rates, monitor transfer queues, and manage user accounts.</p>
+  </div>
+{% endblock %}

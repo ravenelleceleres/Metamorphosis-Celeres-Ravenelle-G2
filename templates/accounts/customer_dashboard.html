@@ -1,0 +1,14 @@
+{% extends "base.html" %}
+{% block title %}Customer Dashboard - Metamorphosis{% endblock %}
+{% block content %}
+  <h1>Customer Dashboard</h1>
+  <p>Welcome, <strong>{{ user.get_full_name|default:user.username }}</strong> ({{ user.get_role_display }})</p>
+  <div class="card">
+    <h3>Currency Converter (PHP)</h3>
+    <p>Check live exchange rates and convert foreign currencies to Philippine Peso (PHP).</p>
+  </div>
+  <div class="card">
+    <h3>Money Transfers</h3>
+    <p>Initiate remittances and view your recent transfer status.</p>
+  </div>
+{% endblock %}
