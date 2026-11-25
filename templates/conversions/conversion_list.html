@@ -1,0 +1,46 @@
+{% extends "base.html" %}
+{% block title %}Currency Conversions - Metamorphosis{% endblock %}
+{% block content %}
+  <h1>PHP Currency Conversions</h1>
+  <p>
+    <a href="{% url 'conversions:create' %}"><strong>+ New PHP Conversion</strong></a>
+  </p>
+
+  <div class="card">
+    <strong>Total Converted PHP:</strong> ₱{{ total_php|floatformat:2 }}
+  </div>
+
+  {% if conversions %}
+    <table border="1" cellpadding="8" cellspacing="0" width="100%">
+      <thead>
+        <tr>
+          {% if user.role == "ADMIN" %}<th>User</th>{% endif %}
+          <th>Foreign Amount</th>
+          <th>Rate to PHP</th>
+          <th>Converted (PHP)</th>
+          <th>Note</th>
+          <th>Date</th>
+          <th>Actions</th>
+        </tr>
+      </thead>
+      <tbody>
+        {% for item in conversions %}
+          <tr>
+            {% if user.role == "ADMIN" %}<td>{{ item.user.username }}</td>{% endif %}
+            <td>{{ item.foreign_amount }} {{ item.source_currency }}</td>
+            <td>₱{{ item.exchange_rate_to_php }}</td>
+            <td><strong>₱{{ item.converted_php_amount }}</strong></td>
+            <td>{{ item.purpose_note|default:"-" }}</td>
+            <td>{{ item.created_at|date:"M d, Y H:i" }}</td>
+            <td>
+              <a href="{% url 'conversions:update' item.pk %}">Edit</a> |
+              <a href="{% url 'conversions:delete' item.pk %}">Delete</a>
+            </td>
+          </tr>
+        {% endfor %}
+      </tbody>
+    </table>
+  {% else %}
+    <p>No conversions recorded yet. Click <strong>+ New PHP Conversion</strong> to start.</p>
+  {% endif %}
+{% endblock %}

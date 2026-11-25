@@ -1,0 +1,11 @@
+{% extends "base.html" %}
+{% block title %}{{ action }} Conversion - Metamorphosis{% endblock %}
+{% block content %}
+  <h1>{{ action }} PHP Conversion</h1>
+  <form method="post">
+    {% csrf_token %}
+    {{ form.as_p }}
+    <button type="submit">Save Conversion</button>
+    <a href="{% url 'conversions:list' %}">Cancel</a>
+  </form>
+{% endblock %}
